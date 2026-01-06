@@ -1,0 +1,5 @@
+create database virtual_system
+character set utf8mb4
+collate utf8mb4_unicode_ci;
+
+use virtual_system;
