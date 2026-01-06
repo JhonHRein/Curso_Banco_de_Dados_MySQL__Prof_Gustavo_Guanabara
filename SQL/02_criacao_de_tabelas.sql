@@ -3,6 +3,7 @@
 -- ======================================================
 
 -- Tabela de Clientes: Armazena dados básicos de quem compra
+
 CREATE TABLE clientes(
     id_cliente INT PRIMARY KEY NOT NULL AUTO_INCREMENT, -- ID automático e único
     nome VARCHAR(50) NOT NULL,                          -- Nome obrigatório
@@ -11,6 +12,7 @@ CREATE TABLE clientes(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; 
 
 -- Tabela de Produtos: Armazena o catálogo de itens à venda
+
 CREATE TABLE produtos(
     id_produto INT PRIMARY KEY AUTO_INCREMENT,          -- ID automático
     nome VARCHAR(50) NOT NULL,                          -- Nome do produto
@@ -23,6 +25,7 @@ CREATE TABLE produtos(
 
 -- Tabela de Pedidos: Registra o cabeçalho da venda
 -- Depende da tabela 'clientes' (precisa de um id_cliente válido)
+
 CREATE TABLE pedidos(
     id_pedido INT PRIMARY KEY AUTO_INCREMENT,           -- ID do pedido
     data_pedido DATE,                                   -- Data da compra
@@ -34,6 +37,7 @@ CREATE TABLE pedidos(
 
 -- Tabela Itens_do_Pedido: Tabela de unificação (Muitos-para-Muitos)
 -- Liga vários produtos a um único pedido
+
 CREATE TABLE itens_do_pedido(
     id_pedido INT,                                      -- Referência ao pedido
     id_produto INT,                                     -- Referência ao produto
