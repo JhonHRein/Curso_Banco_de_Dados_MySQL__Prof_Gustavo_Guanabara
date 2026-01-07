@@ -26,22 +26,20 @@ CREATE TABLE produtos(
 -- Tabela de Pedidos: Registra o cabeçalho da venda
 -- Depende da tabela 'clientes' (precisa de um id_cliente válido)
 
-CREATE TABLE pedidos(
-    id_pedido INT PRIMARY KEY AUTO_INCREMENT,           -- ID do pedido
-    data_pedido DATE,                                   -- Data da compra
-    status VARCHAR(20),                                 -- Ex: 'Pendente', 'Pago'
-    total DECIMAL(10,2),                                -- Valor total da nota
-    id_cliente INT,                                     -- Campo para o relacionamento
-    FOREIGN KEY(id_cliente) REFERENCES clientes(id_cliente) -- Liga pedido ao cliente
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+create table pedidos(
+id_pedido int primary key auto_increment,
+id_cliente int,
+data_pedido date,
+status varchar(20),
+foreign key (id_cliente) references clientes(id_cliente)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Tabela Itens_do_Pedido: Tabela de unificação (Muitos-para-Muitos)
--- Liga vários produtos a um único pedido
-
-CREATE TABLE itens_do_pedido(
-    id_pedido INT,                                      -- Referência ao pedido
-    id_produto INT,                                     -- Referência ao produto
-    PRIMARY KEY(id_pedido, id_produto),                 -- Chave composta (impede produto duplicado no mesmo pedido)
-    FOREIGN KEY(id_pedido) REFERENCES pedidos(id_pedido),
-    FOREIGN KEY(id_produto) REFERENCES produtos(id_produto)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+create table itens_do_pedido(
+id_pedido int,
+id_produto int,
+quantidade int,
+valor_unitario decimal(10,2),
+primary key(id_pedido, id_produto),
+foreign key (id_pedido) references pedidos(id_pedido),
+foreign key (id_produto) references produtos(id_produto)
+)Engine=innodb default charset=utf8mb4 collate=utf8mb4_unicode_ci;
